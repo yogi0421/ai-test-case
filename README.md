@@ -123,3 +123,9 @@ Why I choose Nvidia Triton Inference Server rather than load the pretrained mode
 - Sample Inference : 
 
     <img src='./docs/fastapi-inference-result-new.png'></img>
+
+
+### Demo Video
+
+GDrive Video Link
+    https://drive.google.com/file/d/1uC4SwnHhFJrsXNGKuucfBMDc5Emh9dXn/view?usp=sharing
