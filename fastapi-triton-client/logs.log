@@ -1,0 +1,484 @@
+2024-03-17 11:24:51.054 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [94048]
+2024-03-17 11:24:51.055 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [94048]
+2024-03-17 11:24:51.055 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:24:51.055 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:24:51.055 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:24:51.055 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:24:55.926 | INFO     | starlette.routing:handle:276 - 127.0.0.1:54181 - "GET /docs HTTP/1.1" 200
+2024-03-17 11:24:56.087 | INFO     | starlette.routing:handle:276 - 127.0.0.1:54181 - "GET /openapi.json HTTP/1.1" 200
+2024-03-17 11:25:07.062 | INFO     | uvicorn.middleware.proxy_headers:__call__:78 - 127.0.0.1:54191 - "POST /v1/models/yolov8n HTTP/1.1" 500
+2024-03-17 11:25:07.062 | ERROR    | multiprocessing.process:_bootstrap:315 - Exception in ASGI application
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 4
+               │     └ 7
+               └ <function _main at 0x103509e50>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 4
+           │    └ <function BaseProcess._bootstrap at 0x103399040>
+           └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x103398670>
+    └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x103547a90>, 'target': <bound method Server.run of <uvicorn.server.Server object...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+    │    └ <function subprocess_started at 0x103b9ab80>
+    └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 8084)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x103547af0>>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 8084)>]
+           │       │   │    └ <function Server.serve at 0x103b97e50>
+           │       │   └ <uvicorn.server.Server object at 0x103547af0>
+           │       └ <function run at 0x1035634c0>
+           └ <module 'asyncio' from '/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/async...
+
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x103bec9c0>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+
+> File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 435, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x1040f0e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 78, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5b0>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x160540b20>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x1040f0e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/applications.py", line 271, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5b0>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/applications.py", line 118, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5b0>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x16a934f10>
+          └ <fastapi.applications.FastAPI object at 0x160540b20>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/errors.py", line 184, in __call__
+    raise exc
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x16a93c3a0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x16a934f10>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/cors.py", line 92, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': 'localhost:8084', 'connection': 'keep-alive', 'content-length': '618430', 'sec-ch-ua': '"Chromium";v="122", ...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x16a93c3a0>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x107b794c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/cors.py", line 147, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>>, sen...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x16a9340a0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x16a934070>
+          └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x16a9340a0>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 21, in __call__
+    raise e
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x160592ee0>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x16a934070>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/routing.py", line 706, in __call__
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │     └ <function Route.handle at 0x107b430d0>
+          └ APIRoute(path='/v1/models/yolov8n', name='yolo_inference', methods=['POST'])
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <function request_response.<locals>.app at 0x16a93c1f0>
+          └ APIRoute(path='/v1/models/yolov8n', name='yolo_inference', methods=['POST'])
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x16a94dc40>
+                     └ <function get_request_handler.<locals>.app at 0x16a93c160>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/routing.py", line 237, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x107b26dc0>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/routing.py", line 163, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'image_file': <starlette.datastructures.UploadFile object at 0x16a94d9d0>, 'request': <starlette.requests.Request object at ...
+                 │         └ <function yolo_inference at 0x16a93c0d0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x16a9348e0>
+
+  File "/Users/yogiwahyuromadon/ai-test-case/fastapi-triton-client/app/api.py", line 145, in yolo_inference
+    result['key'] ="value"
+    └ [{'name': 'class2', 'class': 2, 'confidence': 0.6520928144454956, 'box': {'x1': 517.9483642578125, 'y1': 557.3232421875, 'x2'...
+
+TypeError: list indices must be integers or slices, not str
+2024-03-17 11:25:07.077 | ERROR    | multiprocessing.process:_bootstrap:315 - Exception in ASGI application
+
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/spawn.py", line 116, in spawn_main
+    exitcode = _main(fd, parent_sentinel)
+               │     │   └ 4
+               │     └ 7
+               └ <function _main at 0x103509e50>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/spawn.py", line 129, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 4
+           │    └ <function BaseProcess._bootstrap at 0x103399040>
+           └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/process.py", line 315, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x103398670>
+    └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {'config': <uvicorn.config.Config object at 0x103547a90>, 'target': <bound method Server.run of <uvicorn.server.Server object...
+    │    │        │    │        └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+    │    │        │    └ ()
+    │    │        └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+    │    └ <function subprocess_started at 0x103b9ab80>
+    └ <SpawnProcess name='SpawnProcess-1' parent=94046 started>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+    │              └ [<socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 8084)>]
+    └ <bound method Server.run of <uvicorn.server.Server object at 0x103547af0>>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           │       │   │    │             └ [<socket.socket fd=3, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('0.0.0.0', 8084)>]
+           │       │   │    └ <function Server.serve at 0x103b97e50>
+           │       │   └ <uvicorn.server.Server object at 0x103547af0>
+           │       └ <function run at 0x1035634c0>
+           └ <module 'asyncio' from '/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/async...
+
+  File "/opt/homebrew/Cellar/python@3.8/3.8.17_1/Frameworks/Python.framework/Versions/3.8/lib/python3.8/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+           │    │                  └ <coroutine object Server.serve at 0x103bec9c0>
+           │    └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           └ <uvloop.Loop running=True closed=False debug=False>
+
+> File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/protocols/http/httptools_impl.py", line 435, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+                   └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x1040f0e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/uvicorn/middleware/proxy_headers.py", line 78, in __call__
+    return await self.app(scope, receive, send)
+                 │    │   │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5b0>>
+                 │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+                 │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+                 │    └ <fastapi.applications.FastAPI object at 0x160540b20>
+                 └ <uvicorn.middleware.proxy_headers.ProxyHeadersMiddleware object at 0x1040f0e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/applications.py", line 271, in __call__
+    await super().__call__(scope, receive, send)
+                           │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5b0>>
+                           │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+                           └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/applications.py", line 118, in __call__
+    await self.middleware_stack(scope, receive, send)
+          │    │                │      │        └ <bound method RequestResponseCycle.send of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5b0>>
+          │    │                │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │                └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x16a934f10>
+          └ <fastapi.applications.FastAPI object at 0x160540b20>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/errors.py", line 184, in __call__
+    raise exc
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/errors.py", line 162, in __call__
+    await self.app(scope, receive, _send)
+          │    │   │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x16a93c3a0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>
+          └ <starlette.middleware.errors.ServerErrorMiddleware object at 0x16a934f10>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/cors.py", line 92, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+          │    │               │      │        │                     └ Headers({'host': 'localhost:8084', 'connection': 'keep-alive', 'content-length': '618430', 'sec-ch-ua': '"Chromium";v="122", ...
+          │    │               │      │        └ <function ServerErrorMiddleware.__call__.<locals>._send at 0x16a93c3a0>
+          │    │               │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │               └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <function CORSMiddleware.simple_response at 0x107b794c0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/cors.py", line 147, in simple_response
+    await self.app(scope, receive, send)
+          │    │   │      │        └ functools.partial(<bound method CORSMiddleware.send of <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>>, sen...
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x16a9340a0>
+          └ <starlette.middleware.cors.CORSMiddleware object at 0x16a934e80>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
+    raise exc
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
+    await self.app(scope, receive, sender)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x16a934070>
+          └ <starlette.middleware.exceptions.ExceptionMiddleware object at 0x16a9340a0>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 21, in __call__
+    raise e
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <fastapi.routing.APIRouter object at 0x160592ee0>
+          └ <fastapi.middleware.asyncexitstack.AsyncExitStackMiddleware object at 0x16a934070>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/routing.py", line 706, in __call__
+    await route.handle(scope, receive, send)
+          │     │      │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │     │      │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │     │      └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │     └ <function Route.handle at 0x107b430d0>
+          └ APIRoute(path='/v1/models/yolov8n', name='yolo_inference', methods=['POST'])
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+          │    │   │      │        └ <function ExceptionMiddleware.__call__.<locals>.sender at 0x16a93c4c0>
+          │    │   │      └ <bound method RequestResponseCycle.receive of <uvicorn.protocols.http.httptools_impl.RequestResponseCycle object at 0x16a94d5...
+          │    │   └ {'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('127.0.0.1', 8084), 'cl...
+          │    └ <function request_response.<locals>.app at 0x16a93c1f0>
+          └ APIRoute(path='/v1/models/yolov8n', name='yolo_inference', methods=['POST'])
+
+  File "/opt/homebrew/lib/python3.8/site-packages/starlette/routing.py", line 66, in app
+    response = await func(request)
+                     │    └ <starlette.requests.Request object at 0x16a94dc40>
+                     └ <function get_request_handler.<locals>.app at 0x16a93c160>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/routing.py", line 237, in app
+    raw_response = await run_endpoint_function(
+                         └ <function run_endpoint_function at 0x107b26dc0>
+
+  File "/opt/homebrew/lib/python3.8/site-packages/fastapi/routing.py", line 163, in run_endpoint_function
+    return await dependant.call(**values)
+                 │         │      └ {'image_file': <starlette.datastructures.UploadFile object at 0x16a94d9d0>, 'request': <starlette.requests.Request object at ...
+                 │         └ <function yolo_inference at 0x16a93c0d0>
+                 └ <fastapi.dependencies.models.Dependant object at 0x16a9348e0>
+
+  File "/Users/yogiwahyuromadon/ai-test-case/fastapi-triton-client/app/api.py", line 145, in yolo_inference
+    result['key'] ="value"
+    └ [{'name': 'class2', 'class': 2, 'confidence': 0.6520928144454956, 'box': {'x1': 517.9483642578125, 'y1': 557.3232421875, 'x2'...
+
+TypeError: list indices must be integers or slices, not str
+2024-03-17 11:26:08.630 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:26:08.633 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:26:08.735 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:26:08.735 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:26:08.736 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:26:08.736 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:26:08.736 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [94048]
+2024-03-17 11:26:08.736 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [94048]
+2024-03-17 11:26:12.024 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [94688]
+2024-03-17 11:26:12.024 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [94688]
+2024-03-17 11:26:12.024 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:26:12.025 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:26:12.025 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:26:12.025 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:26:16.800 | INFO     | starlette.routing:app:69 - 127.0.0.1:54270 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:28:36.039 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:28:36.041 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:28:36.142 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:28:36.142 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:28:36.143 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:28:36.143 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:28:36.144 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [94688]
+2024-03-17 11:28:36.144 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [94688]
+2024-03-17 11:28:39.506 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [95694]
+2024-03-17 11:28:39.507 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [95694]
+2024-03-17 11:28:39.507 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:28:39.507 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:28:39.507 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:28:39.508 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:36:21.322 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:36:21.324 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:36:21.425 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:36:21.426 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:36:21.426 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:36:21.426 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:36:21.427 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [95694]
+2024-03-17 11:36:21.427 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [95694]
+2024-03-17 11:36:26.033 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [98990]
+2024-03-17 11:36:26.033 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [98990]
+2024-03-17 11:36:26.033 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:36:26.033 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:36:26.034 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:36:26.034 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:36:34.853 | INFO     | starlette.routing:app:69 - 127.0.0.1:54597 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:37:54.689 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:37:54.691 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:37:54.794 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:37:54.794 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:37:54.796 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:37:54.796 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:37:54.796 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [98990]
+2024-03-17 11:37:54.796 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [98990]
+2024-03-17 11:37:58.320 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [99709]
+2024-03-17 11:37:58.321 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [99709]
+2024-03-17 11:37:58.321 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:37:58.321 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:37:58.321 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:37:58.321 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:38:11.250 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:38:11.251 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:38:11.352 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:38:11.353 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:38:11.353 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:38:11.354 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:38:11.354 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [99709]
+2024-03-17 11:38:11.354 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [99709]
+2024-03-17 11:38:13.859 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [99860]
+2024-03-17 11:38:13.859 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [99860]
+2024-03-17 11:38:13.859 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:38:13.859 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:38:13.859 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:38:13.860 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:38:48.019 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:38:48.020 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:38:48.123 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:38:48.123 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:38:48.124 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:38:48.124 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:38:48.125 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [99860]
+2024-03-17 11:38:48.125 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [99860]
+2024-03-17 11:38:51.001 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [336]
+2024-03-17 11:38:51.001 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [336]
+2024-03-17 11:38:51.001 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:38:51.001 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:38:51.002 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:38:51.002 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:38:55.270 | INFO     | starlette.routing:handle:276 - 127.0.0.1:54659 - "GET /docs HTTP/1.1" 200
+2024-03-17 11:38:55.377 | INFO     | starlette.routing:handle:276 - 127.0.0.1:54659 - "GET /openapi.json HTTP/1.1" 200
+2024-03-17 11:39:01.545 | INFO     | starlette.routing:app:69 - 127.0.0.1:54661 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:39:11.044 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:39:11.045 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:39:11.146 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:39:11.147 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:39:11.147 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:39:11.148 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:39:11.148 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [336]
+2024-03-17 11:39:11.148 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [336]
+2024-03-17 11:39:13.966 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [593]
+2024-03-17 11:39:13.967 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [593]
+2024-03-17 11:39:13.967 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:39:13.967 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:39:13.967 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:39:13.968 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:39:14.684 | INFO     | starlette.routing:app:69 - 127.0.0.1:54671 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:39:50.060 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:39:50.062 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:39:50.164 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:39:50.164 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:39:50.166 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:39:50.166 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:39:50.166 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [593]
+2024-03-17 11:39:50.166 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [593]
+2024-03-17 11:39:52.984 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [942]
+2024-03-17 11:39:52.984 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [942]
+2024-03-17 11:39:52.984 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:39:52.985 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:39:52.985 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:39:52.985 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:39:55.609 | INFO     | starlette.routing:app:69 - 127.0.0.1:54684 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:40:15.902 | INFO     | starlette.routing:app:69 - 127.0.0.1:54711 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:40:51.782 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:40:51.784 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:40:51.886 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:40:51.886 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:40:51.887 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:40:51.887 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:40:51.888 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [942]
+2024-03-17 11:40:51.888 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [942]
+2024-03-17 11:40:55.078 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [1449]
+2024-03-17 11:40:55.078 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [1449]
+2024-03-17 11:40:55.078 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:40:55.078 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:40:55.079 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:40:55.079 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:40:57.809 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:40:57.810 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:40:57.914 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:40:57.914 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:40:57.914 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:40:57.915 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:40:57.915 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [1449]
+2024-03-17 11:40:57.915 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [1449]
+2024-03-17 11:41:00.142 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [1520]
+2024-03-17 11:41:00.143 | INFO     | multiprocessing.process:_bootstrap:315 - Started server process [1520]
+2024-03-17 11:41:00.143 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:41:00.143 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application startup.
+2024-03-17 11:41:00.143 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:41:00.143 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application startup complete.
+2024-03-17 11:41:48.555 | INFO     | starlette.routing:app:69 - 127.0.0.1:54723 - "POST /v1/models/yolov8n HTTP/1.1" 200
+2024-03-17 11:42:33.723 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:42:33.725 | INFO     | multiprocessing.process:run:108 - Shutting down
+2024-03-17 11:42:33.828 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:42:33.829 | INFO     | uvicorn._subprocess:subprocess_started:76 - Waiting for application shutdown.
+2024-03-17 11:42:33.831 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:42:33.831 | INFO     | uvicorn._subprocess:subprocess_started:76 - Application shutdown complete.
+2024-03-17 11:42:33.832 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [1520]
+2024-03-17 11:42:33.832 | INFO     | multiprocessing.process:_bootstrap:315 - Finished server process [1520]

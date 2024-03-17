@@ -1,0 +1,11 @@
+fastapi==0.78.0
+numpy
+uvicorn==0.22.0
+loguru==0.7.0
+ultralytics==8.1.29
+opencv-python==4.8.0.74
+opencv-contrib-python==4.6.0.66
+python-multipart==0.0.6
+tritonclient[all]==2.42.0
+torch==2.0.1
+torchvision==0.15.2
