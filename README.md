@@ -129,3 +129,34 @@ Why I choose Nvidia Triton Inference Server rather than load the pretrained mode
 
 GDrive Video Link
     https://drive.google.com/file/d/1uC4SwnHhFJrsXNGKuucfBMDc5Emh9dXn/view?usp=sharing
+
+
+# Bonus Points
+5. Create docker image that can run the code either on -
+    a. CPU
+    b. GPU
+
+    > Answer :
+    On this repo If you want to deploy Yolo Model both on GPU and CPU, you just need to run the `Triton Model Server` container on inctance that have Nvidia GPU(GPU Driver, CUDA, etc need to install first), no need specific container base image to run on GPU device, just use as it is.
+
+6. Explain how to automate the deployment of this docker image on a VM/remote server.
+    > Answer : If I can choose where the AI/ML Service will dpeloyed I will not deploy it on a single instance VM/compute engine, I prefer use Kubernetes to deploy this service using `Helm` package manager, because all you need on production API/Service already have on Kubenernetes, Availability(implementing autoscale), Reliability(Over 99% SLO), Security(Integration with Secret Manager), and highly Cost Optimized.
+
+
+# Assignment Question 
+1. In your solution document, explain briefly1. How you created the solution for each step
+    > Answer : You can check on file `README.md` on every service part(directory `fast-api-triton-client` and `triton-model-server`)
+
+2. Which base image you selected for creating docker. Can you select any other image?
+    > Answer : For Triton Inverence Server I choose base image from NVCR `nvcr.io/nvidia/tritonserver:23.12-py3` and for FastAPI Service I choose `python:3.8-slim`.
+    Its possible to select other image, but you need to install the dependency manually and and its heavy to maintain.
+
+3. How you would test if your solution is correct and works efficiently.
+    > Answer : I think I try my best, but to validate the result I Use `locust` to loadtest the endpoint, the result from `locust` the `P99` of response time is only `150ms`, and the max is `220ms` on `10.7RPS`, but need to mention I deploy the service on MacBook Air that only have 8Gb of memory, and I also running many application on the same time.
+    
+    Locust Result Image : 
+    
+    <img src='docs/locust-result.png'></img>
+
+4. What would be your next steps to optimize your solution?
+    > Answer : For the model Model Optimization,  the model input type is still use `TYPE_FP32` rather that `TYPE_FP16`, and even if I have more time, I want to convert that model into `TensorRT` so the model can run extremely fast.
